@@ -47,6 +47,24 @@
     <div class="hero-content">
         <div class="hero-buttons">
         </div>
+        <table border="1" width="800">
+            <tr>
+                <th colspan="2">Nom du médecin</th>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td>
+                    <div><strong>Horaires</strong></div>
+                    <div>Lundi</div><br>
+                    <div>Mardi</div><br>
+                    <div>Mercredi</div><br>
+                    <div>Jeudi</div><br>
+                    <div>Vendredi</div><br>
+                    <div>Samedi</div><br>
+                    <div>Dimanche</div><br>
+                </td>
+            </tr>
+        </table>
     </div>
 </section>
 

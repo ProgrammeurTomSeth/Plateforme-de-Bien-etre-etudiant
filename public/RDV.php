@@ -1,7 +1,6 @@
 <?php
 ?>
 
-<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +14,6 @@
         <div class="logo">
             <img src="../css/bien-être%20étudiant%20(1)_page-0001.jpg" alt="Bien-être Étudiant">
         </div>
-
         <ul class="nav-menu">
             <li class="nav-item active">
                 <a href="Page_Accueil.php" class="nav-link">
@@ -67,7 +65,6 @@
         </table>
     </div>
 </section>
-
 
 <footer class="footer">
     <div class="container">

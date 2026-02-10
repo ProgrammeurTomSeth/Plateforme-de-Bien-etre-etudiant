@@ -1,11 +1,6 @@
 <?php
 // Connexion BDD
-$pdo = new PDO(
-    "mysql:host=localhost;dbname=consultation_db;charset=utf8",
-    "root",
-    "",
-    array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-);
+$pdo = new PDO("mysql:host=localhost;dbname=consultation_db;charset=utf8", "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 // Suppression d’un rendez-vous
 if (isset($_POST['supprimer_id'])) {

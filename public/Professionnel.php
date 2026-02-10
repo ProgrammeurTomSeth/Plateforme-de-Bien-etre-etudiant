@@ -1,94 +1,59 @@
-<?php
-?>
+<section class="professionnels-section">
+    <h2>Nos professionnels</h2>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professionnel</title>
-    <link rel="stylesheet" href="../css/Page_Accueil.css">
-</head>
-<body>
-<nav class="navbar">
-    <div class="nav-container">
-        <div class="logo">
-            <img src="../css/bien-être%20étudiant%20(1)_page-0001.jpg" alt="Bien-être Étudiant">
-        </div>
-
-        <ul class="nav-menu">
-            <li class="nav-item active">
-                <a href="Page_Accueil.php" class="nav-link">
-                    <span class="icon">Accueil</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="Professionnel.php" class="nav-link">
-                    <span class="icon">Professionnels</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="RDV.php" class="nav-link">
-                    <span class="icon">Prendre RDV</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="FAQ.php" class="nav-link">
-                    <span class="icon">FAQ</span>
-                </a>
-            </li>
-        </ul>
-
-        <button class="btn-login">LOGIN</button>
+    <!-- Filtres -->
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="psychologue">Psychologues</button>
+        <button class="filter-btn" data-filter="psychiatre">Psychiatres</button>
+        <button class="filter-btn" data-filter="therapeute">Thérapeutes</button>
+        <button class="filter-btn" data-filter="enfant">Enfance / Ados</button>
+        <button class="filter-btn" data-filter="travail">Travail</button>
+        <button class="filter-btn" data-filter="specialise">Spécialistes</button>
     </div>
-</nav>
 
-<section class="hero">
-    <div class="hero-content">
-        <div class="hero-buttons">
+    <!-- Cartes professionnels -->
+    <div class="pro-grid">
+
+        <div class="pro-card psychologue">
+            <h3>Dr. Sophie Martin</h3>
+            <p>Psychologue clinicienne</p>
+            <p>📍 Paris 15e</p>
+            <p>🧠 TCC, Anxiété</p>
+            <span>Visio / Présentiel</span>
         </div>
+
+        <div class="pro-card therapeute">
+            <h3>Thomas Dubois</h3>
+            <p>Psychothérapeute</p>
+            <p>📍 Lyon 2e</p>
+            <p>👥 Thérapie systémique</p>
+            <span>Visio / Présentiel / Messagerie</span>
+        </div>
+
+        <div class="pro-card travail">
+            <h3>Laura Petit</h3>
+            <p>Psychologue du travail</p>
+            <p>📍 Bordeaux</p>
+            <p>💼 Stress professionnel</p>
+            <span>Visio / Messagerie</span>
+        </div>
+
+        <div class="pro-card enfant">
+            <h3>Chloé Robert</h3>
+            <p>Psychologue enfants</p>
+            <p>📍 Nice</p>
+            <p>🎲 Thérapie par le jeu</p>
+            <span>Présentiel</span>
+        </div>
+
+        <div class="pro-card specialise">
+            <h3>Dr. Antoine Simon</h3>
+            <p>Psychiatre</p>
+            <p>📍 Montpellier</p>
+            <p>🩺 Troubles de l’humeur</p>
+            <span>Visio / Présentiel</span>
+        </div>
+
     </div>
 </section>
-
-
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>Bien-être Étudiant</h4>
-                <p>Votre santé mentale est notre priorité</p>
-            </div>
-            <div class="footer-col">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#professionnels">Professionnels</a></li>
-                    <li><a href="#rdv">Prendre RDV</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Informations</h4>
-                <ul>
-                    <li><a href="#apropos">À propos</a></li>
-                    <li><a href="#confidentialite">Confidentialité</a></li>
-                    <li><a href="#mentions">Mentions légales</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Urgences</h4>
-                <ul>
-                    <li>3114 - Numéro national</li>
-                    <li>Nightline - Écoute étudiante</li>
-                    <li>15 - SAMU</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Bien-être Étudiant. Tous droits réservés.</p>
-        </div>
-    </div>
-</footer>
-</body>
-</html>

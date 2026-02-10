@@ -1,64 +1,78 @@
 <?php
-// Connexion à la base de données
+// Connexion BDD
 $pdo = new PDO(
-    "mysql:host=localhost;dbname=hopital;charset=utf8",
+    "mysql:host=localhost;dbname=consultation_db;charset=utf8",
     "root",
     "",
-    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+    array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
 );
 
-// Suppression du rendez-vous
+// Suppression d’un rendez-vous
 if (isset($_POST['supprimer_id'])) {
-    $stmt = $pdo->prepare("DELETE FROM rendez_vous WHERE id = ?");
-    $stmt->execute([$_POST['supprimer_id']]);
+    $stmt = $pdo->prepare("DELETE FROM RENDEZ_VOUS WHERE id_rendez_vous = ?");
+    $stmt->execute(array($_POST['supprimer_id']));
 }
 
 // Récupération des rendez-vous
-$rdvs = $pdo->query("SELECT * FROM rendez_vous");
+$sql = "
+SELECT 
+    r.id_rendez_vous,
+    r.date_rdv,
+    r.mode_consultation,
+    r.status_rdv,
+    CONCAT(e.prenom, ' ', e.nom) AS etudiant,
+    CONCAT(p.prenom, ' ', p.nom) AS professionnel,
+    p.specialiste
+FROM RENDEZ_VOUS r
+JOIN ETUDIANT e ON r.id_etudiant = e.id_etudiant
+JOIN PROFESSIONEL p ON r.id_professionel = p.id_professionel
+ORDER BY r.date_rdv
+";
+
+$rdvs = $pdo->query($sql);
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Rendez-vous médicaux</title>
+    <title>Rendez-vous</title>
 </head>
 <body>
 
-<h2>Liste des rendez-vous</h2>
+<h2>Rendez-vous médicaux</h2>
 
 <?php foreach ($rdvs as $rdv) { ?>
 
     <table border="1" width="800" style="margin-bottom:20px;">
         <tr>
             <th colspan="2">
-                <?= htmlspecialchars($rdv['medecin']) ?>
+                <?= htmlspecialchars($rdv['professionnel']) ?>
+                (<?= htmlspecialchars($rdv['specialiste']) ?>)
             </th>
         </tr>
+
         <tr>
             <td width="200" align="center">
-                <img src="photo_medecin.jpg" width="150" alt="Photo médecin">
+                Photo
             </td>
             <td>
-                <div><strong>Horaires</strong></div>
+                <div><strong>Informations</strong></div><br>
 
-                <div>Lundi : <?= isset($rdv['lundi']) ? $rdv['lundi'] : '-' ?></div><br>
-                <div>Mardi : <?= isset($rdv['mardi']) ? $rdv['mardi'] : '-' ?></div><br>
-                <div>Mercredi : <?= isset($rdv['mercredi']) ? $rdv['mercredi'] : '-' ?></div><br>
-                <div>Jeudi : <?= isset($rdv['jeudi']) ? $rdv['jeudi'] : '-' ?></div><br>
-                <div>Vendredi : <?= isset($rdv['vendredi']) ? $rdv['vendredi'] : '-' ?></div><br>
-                <div>Samedi : <?= isset($rdv['samedi']) ? $rdv['samedi'] : '-' ?></div><br>
-                <div>Dimanche : <?= isset($rdv['dimanche']) ? $rdv['dimanche'] : '-' ?></div><br>
+                <div>Étudiant : <?= htmlspecialchars($rdv['etudiant']) ?></div><br>
+                <div>Date : <?= date('d/m/Y H:i', strtotime($rdv['date_rdv'])) ?></div><br>
+                <div>Mode : <?= htmlspecialchars($rdv['mode_consultation']) ?></div><br>
+                <div>Statut : <?= htmlspecialchars($rdv['status_rdv']) ?></div><br>
 
                 <form method="POST" onsubmit="return confirm('Supprimer ce rendez-vous ?');">
-                    <input type="hidden" name="supprimer_id" value="<?= $rdv['id'] ?>">
+                    <input type="hidden" name="supprimer_id" value="<?= $rdv['id_rendez_vous'] ?>">
                     <button type="submit">🗑 Supprimer le rendez-vous</button>
                 </form>
             </td>
         </tr>
     </table>
 
-<?php }
-?>
+<?php } ?>
+
 </body>
 </html>

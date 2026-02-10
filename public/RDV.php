@@ -1,110 +1,120 @@
 <?php
-$pdo = new PDO("mysql:host=localhost;dbname=consultation_db;charset=utf8", "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+$pdo = new PDO("mysql:host=localhost;dbname=consultation_db;charset=utf8", "root", "", [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+]);
+
+// Date sélectionnée par l'utilisateur
+$date = isset($_GET['date']) ? $_GET['date'] : null;
+
+$profs = [];
+if($date) {
+    $stmt = $pdo->prepare("
+        SELECT p.id_professionel, CONCAT(p.prenom, ' ', p.nom) AS nom_professionel, p.specialiste, r.date_rdv, r.status_rdv
+        FROM PROFESSIONEL p
+        LEFT JOIN RENDEZ_VOUS r 
+            ON p.id_professionel = r.id_professionel 
+            AND DATE(r.date_rdv) = :date
+            AND r.status_rdv NOT IN ('annule')
+        WHERE p.statut_site = 'actif'
+        ORDER BY p.nom, r.date_rdv
+    ");
+    $stmt->execute(['date' => $date]);
+    $rdvs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Regrouper par professionnel
+    foreach($rdvs as $r) {
+        $profs[$r['id_professionel']]['nom'] = $r['nom_professionel'];
+        $profs[$r['id_professionel']]['specialiste'] = $r['specialiste'];
+        $profs[$r['id_professionel']]['rdvs'][] = $r['date_rdv'];
+    }
+}
 ?>
 
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RVD</title>
+    <title>Bien-être Étudiant</title>
     <link rel="stylesheet" href="../css/Page_Accueil.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin:0; padding:0; }
+        nav { background:#2a9d8f; padding:10px; color:white; }
+        nav a { color:white; margin-right:15px; text-decoration:none; }
+        .container { padding:20px; }
+        h2 { color:#264653; }
+        ul { list-style:none; padding-left:0; }
+        li { margin-bottom:5px; }
+        .calendar-section { margin-bottom:20px; }
+    </style>
 </head>
 <body>
 <nav class="navbar">
     <div class="nav-container">
         <div class="logo">
-            <img src="../css/bien-être%20étudiant%20(1)_page-0001.jpg" alt="Bien-être Étudiant">
+            <img src="../css/bien-être%20étudiant%20(1)_page-0001.jpg" alt="Bien-être Étudiant" width="150">
         </div>
-        <ul class="nav-menu">
-            <li class="nav-item active">
-                <a href="Page_Accueil.php" class="nav-link">
-                    <span class="icon">Accueil</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="Professionnel.php" class="nav-link">
-                    <span class="icon">Professionnels</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="RDV.php" class="nav-link">
-                    <span class="icon">Prendre RDV</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="FAQ.php" class="nav-link">
-                    <span class="icon">FAQ</span>
-                </a>
-            </li>
-        </ul>
-
-        <button class="btn-login">LOGIN</button>
+        <a href="#">Accueil</a>
+        <a href="Professionnel.php">Professionnels</a>
+        <a href="RDV.php">Prendre RDV</a>
+        <a href="FAQ.php">FAQ</a>
     </div>
 </nav>
 
-<section class="hero">
-    <div class="hero-content">
-        <div class="hero-buttons">
-        </div>
-        <table border="1" width="800">
-            <tr>
-                <th colspan="2">Nom du médecin</th>
-            </tr>
-            <tr>
-                <td>Photo</td>
-                <td>
-                    <div><strong>Horaires</strong></div>
-                    <div>Lundi</div><br>
-                    <div>Mardi</div><br>
-                    <div>Mercredi</div><br>
-                    <div>Jeudi</div><br>
-                    <div>Vendredi</div><br>
-                    <div>Samedi</div><br>
-                    <div>Dimanche</div><br>
-                </td>
-            </tr>
-        </table>
-    </div>
-</section>
+<div class="container">
+    <h1>Bienvenue sur Bien-être Étudiant</h1>
+    <p>Choisissez un jour pour voir les disponibilités des professionnels :</p>
 
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>Bien-être Étudiant</h4>
-                <p>Votre santé mentale est notre priorité</p>
-            </div>
-            <div class="footer-col">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#professionnels">Professionnels</a></li>
-                    <li><a href="#rdv">Prendre RDV</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Informations</h4>
-                <ul>
-                    <li><a href="#apropos">À propos</a></li>
-                    <li><a href="#confidentialite">Confidentialité</a></li>
-                    <li><a href="#mentions">Mentions légales</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Urgences</h4>
-                <ul>
-                    <li>3114 - Numéro national</li>
-                    <li>Nightline - Écoute étudiante</li>
-                    <li>15 - SAMU</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Bien-être Étudiant. Tous droits réservés.</p>
-        </div>
+    <div class="calendar-section">
+        <input type="date" id="date-picker" min="<?= date('Y-m-d') ?>" value="<?= $date ?? '' ?>">
+        <button id="voir-disponibilites">Voir Disponibilités</button>
     </div>
+
+    <?php if($date): ?>
+        <h2>Disponibilités pour le <?= date('d/m/Y', strtotime($date)) ?></h2>
+        <?php if(!empty($profs)): ?>
+            <?php foreach($profs as $id => $p): ?>
+                <h3><?= $p['nom'] ?> (<?= $p['specialiste'] ?>)</h3>
+                <ul>
+                    <?php
+                    for($h=9; $h<=18; $h++) {
+                        $heure = sprintf("%02d:00:00", $h);
+                        $rdvPris = false;
+                        if(!empty($p['rdvs'])) {
+                            foreach($p['rdvs'] as $r) {
+                                if(substr($r, 11, 8) == $heure) {
+                                    $rdvPris = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if($rdvPris) {
+                            echo "<li>$heure - Occupé</li>";
+                        } else {
+                            echo "<li>$heure - <a href='PrendreRDV.php?id_pro={$id}&date={$date}&heure={$heure}'>Disponible</a></li>";
+                        }
+                    }
+                    ?>
+                </ul>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Aucun professionnel actif trouvé pour cette date.</p>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>
+
+<script>
+    document.getElementById('voir-disponibilites').addEventListener('click', function() {
+        const date = document.getElementById('date-picker').value;
+        if(date) {
+            window.location.href = `?date=${date}`;
+        } else {
+            alert('Veuillez sélectionner une date.');
+        }
+    });
+</script>
+
+<footer class="footer" style="background:#264653; color:white; padding:20px; text-align:center;">
+    &copy; 2025 Bien-être Étudiant
 </footer>
 </body>
 </html>

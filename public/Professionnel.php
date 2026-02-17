@@ -1,4 +1,32 @@
 <!DOCTYPE html>
+<?php
+$pdo = new PDO(
+        "mysql:host=localhost;dbname=consultation_db;charset=utf8",
+        "root",
+        "",
+        [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]
+);
+
+/* Récupération des professionnels actifs */
+$sql = "
+    SELECT 
+        p.id_professionel,
+        p.nom,
+        p.prenom,
+        p.specialiste,
+        p.mode_consultation,
+        p.statut
+    FROM PROFESSIONEL p
+    WHERE p.statut_site = 'actif'
+    ORDER BY p.nom
+";
+
+$professionnels = $pdo->query($sql)->fetchAll();
+?>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -308,6 +336,7 @@
     </style>
 </head>
 <body>
+
 <nav class="navbar">
     <div class="nav-container">
         <div class="logo">
@@ -315,412 +344,80 @@
         </div>
 
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="Page_Accueil.php" class="nav-link">
-                    <span class="icon">Accueil</span>
-                </a>
+            <li class="nav-item"><a href="Page_Accueil.php" class="nav-link">Accueil</a>
             </li>
-            <li class="nav-item active">
-                <a href="Professionnel.php" class="nav-link">
-                    <span class="icon">Professionnels</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="RDV.php" class="nav-link">
-                    <span class="icon">Prendre RDV</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="FAQ.php" class="nav-link">
-                    <span class="icon">FAQ</span>
-                </a>
-            </li>
+            <li class="nav-item active"><a href="Professionnel.php" class="nav-link">Professionnels</a></li>
+            <li class="nav-item"><a href="RDV.php" class="nav-link">Prendre RDV</a></li>
+            <li class="nav-item"><a href="FAQ.php" class="nav-link">FAQ</a></li>
         </ul>
 
         <button class="btn-login">LOGIN</button>
     </div>
 </nav>
 
-<section class="professionnels-header">
-    <h1>Nos Professionnels</h1>
-    <p>Retrouvez notre réseau de professionnels qualifiés et engagés pour votre bien-être. Chaque expert est sélectionné avec soin pour vous offrir un accompagnement adapté à vos besoins.</p>
-</section>
-
-<section class="filtres-section">
-    <div class="filtres-container">
-        <form method="GET" action="" class="filtres-form">
-            <div class="filtre-group">
-                <label for="search"><i class="fas fa-search"></i> Recherche</label>
-                <input type="text" id="search" name="search" placeholder="Nom, spécialité, ville...">
-            </div>
-
-            <div class="filtre-group">
-                <label for="specialite"><i class="fas fa-stethoscope"></i> Spécialité</label>
-                <select id="specialite" name="specialite">
-                    <option value="">Toutes les spécialités</option>
-                    <option value="Psychologue clinicien">Psychologue clinicien</option>
-                    <option value="Psychothérapeute">Psychothérapeute</option>
-                    <option value="Neuropsychologue">Neuropsychologue</option>
-                    <option value="Psychiatre">Psychiatre</option>
-                    <option value="Psychologue du travail">Psychologue du travail</option>
-                    <option value="Sexologue">Sexologue</option>
-                    <option value="Thérapeute familial">Thérapeute familial</option>
-                    <option value="Addictologue">Addictologue</option>
-                    <option value="Psychotraumatologue">Psychotraumatologue</option>
-                    <option value="Psychologue enfants">Psychologue enfants</option>
-                </select>
-            </div>
-
-            <div class="filtre-group">
-                <label for="ville"><i class="fas fa-map-marker-alt"></i> Ville</label>
-                <select id="ville" name="ville">
-                    <option value="">Toutes les villes</option>
-                    <option value="Paris">Paris</option>
-                    <option value="Lyon">Lyon</option>
-                    <option value="Marseille">Marseille</option>
-                    <option value="Toulouse">Toulouse</option>
-                    <option value="Bordeaux">Bordeaux</option>
-                    <option value="Lille">Lille</option>
-                    <option value="Nice">Nice</option>
-                    <option value="Nantes">Nantes</option>
-                    <option value="Strasbourg">Strasbourg</option>
-                    <option value="Montpellier">Montpellier</option>
-                </select>
-            </div>
-
-            <div class="filtre-group">
-                <label for="mode"><i class="fas fa-laptop-house"></i> Mode de consultation</label>
-                <select id="mode" name="mode">
-                    <option value="">Tous les modes</option>
-                    <option value="visio">Visio uniquement</option>
-                    <option value="presentiel">Présentiel uniquement</option>
-                    <option value="mixte">Visio et présentiel</option>
-                    <option value="messagerie">Messagerie uniquement</option>
-                </select>
-            </div>
-
-            <div class="btn-filtres">
-                <button type="submit" class="btn-filter">
-                    <i class="fas fa-filter"></i> Filtrer
-                </button>
-                <a href="Professionnel.php" class="btn-reset">
-                    <i class="fas fa-redo"></i> Réinitialiser
-                </a>
-            </div>
-        </form>
+<section class="hero">
+    <div class="hero-content">
+        <h1>Nos professionnels de santé</h1>
+        <p>Des spécialistes à votre écoute</p>
     </div>
 </section>
 
-<section class="professionnels-grid">
-    <div class="results-count">
-        <span id="count">13</span> professionnels trouvés
-    </div>
+<section class="professionnels">
+    <div class="container">
 
-    <div class="professionnels-list" id="professionnels-list">
-        <!-- 👥 PSYCHOLOGUES CLINIQUES & PSYCHOTHÉRAPEUTES -->
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Dr. Sophie Martin</h3>
-                <p class="professionnel-specialite">Psychologue clinicienne</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Paris 15e</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Visio et présentiel</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : TCC, Anxiété</span></div>
-                </div>
-                <div class="professionnel-description">Spécialiste en Thérapie Cognitive et Comportementale avec expertise dans le traitement des troubles anxieux et des attaques de panique.</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Visio + Présentiel</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>24h</strong></div>
-                <a href="RDV.php?professionnel=1" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
+        <?php if (empty($professionnels)) : ?>
+            <p>Aucun professionnel disponible actuellement.</p>
+        <?php endif; ?>
 
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Thomas Dubois</h3>
-                <p class="professionnel-specialite">Psychothérapeute</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Lyon 2e</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Visio, présentiel, messagerie</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : Thérapie systémique</span></div>
-                </div>
-                <div class="professionnel-description">Thérapeute systémique expérimenté dans l'accompagnement des dynamiques familiales et relationnelles complexes.</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Tous modes</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>36h</strong></div>
-                <a href="RDV.php?professionnel=2" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
+        <?php foreach ($professionnels as $pro) : ?>
 
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Camille Laurent</h3>
-                <p class="professionnel-specialite">Psychologue</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Marseille</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Présentiel et visio</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : Burn-out, Estime de soi</span></div>
-                </div>
-                <div class="professionnel-description">Accompagnement spécialisé dans l'épuisement professionnel et la reconstruction de l'estime de soi.</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Mixte</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>48h</strong></div>
-                <a href="RDV.php?professionnel=3" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
+            <table border="1" width="800" style="margin:30px auto; border-collapse:collapse;">
 
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Nicolas Moreau</h3>
-                <p class="professionnel-specialite">Neuropsychologue</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Toulouse</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Présentiel uniquement</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : TDAH, Troubles apprentissage</span></div>
-                </div>
-                <div class="professionnel-description">Expert en évaluation et accompagnement des troubles neurodéveloppementaux (TDAH, dyslexie, dyspraxie).</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Présentiel</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>72h</strong></div>
-                <a href="RDV.php?professionnel=4" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
+                <tr>
+                    <th colspan="2">
+                        <?= htmlspecialchars($pro['prenom'] . ' ' . $pro['nom']) ?>
+                        <br>
+                        <small><?= htmlspecialchars($pro['specialiste']) ?></small>
+                    </th>
+                </tr>
 
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Laura Petit</h3>
-                <p class="professionnel-specialite">Psychologue du travail</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Bordeaux</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Visio et messagerie</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : Stress professionnel</span></div>
-                </div>
-                <div class="professionnel-description">Spécialiste en risques psychosociaux et gestion du stress en milieu professionnel.</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Visio</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>24h</strong></div>
-                <a href="RDV.php?professionnel=5" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
+                <tr>
+                    <td width="250" align="center">
+                        <img src="../images/default-medecin.png"
+                             alt="Photo médecin"
+                             width="200">
+                        <br><br>
+                        <div><strong>Consultation :</strong></div>
+                        <div><?= htmlspecialchars($pro['mode_consultation']) ?></div>
+                        <br>
+                        <div><strong>Statut :</strong> <?= htmlspecialchars($pro['statut']) ?></div>
+                    </td>
 
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Julien Bernard</h3>
-                <p class="professionnel-specialite">Thérapeute de couple</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Lille</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Présentiel et visio</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : Relations, Communication</span></div>
-                </div>
-                <div class="professionnel-description">Accompagnement des couples dans l'amélioration de la communication et la résolution des conflits.</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Mixte</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>48h</strong></div>
-                <a href="RDV.php?professionnel=6" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
+                    <td>
+                        <div><strong>Horaires</strong></div><br>
 
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Chloé Robert</h3>
-                <p class="professionnel-specialite">Psychologue enfants</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Nice</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Présentiel uniquement</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : Thérapie par le jeu</span></div>
-                </div>
-                <div class="professionnel-description">Spécialisée dans l'accompagnement des enfants par des techniques ludothérapeutiques adaptées.</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Présentiel</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>72h</strong></div>
-                <a href="RDV.php?professionnel=7" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
+                        <div>Lundi : 09h00 - 17h00</div><br>
+                        <div>Mardi : 09h00 - 17h00</div><br>
+                        <div>Mercredi : 09h00 - 17h00</div><br>
+                        <div>Jeudi : 09h00 - 17h00</div><br>
+                        <div>Vendredi : 09h00 - 16h00</div><br>
+                        <div>Samedi : Fermé</div><br>
+                        <div>Dimanche : Fermé</div><br>
 
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Maxime Richard</h3>
-                <p class="professionnel-specialite">Sexologue</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Nantes</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Visio et présentiel</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : Santé sexuelle, Intimité</span></div>
-                </div>
-                <div class="professionnel-description">Accompagnement dans les problématiques de santé sexuelle et de vie intime avec bienveillance.</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Mixte</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>36h</strong></div>
-                <a href="RDV.php?professionnel=8" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
+                        <br>
+                        <a href="RDV.php?id_professionel=<?= $pro['id_professionel'] ?>">
+                            ➜ Prendre rendez-vous
+                        </a>
+                    </td>
+                </tr>
 
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Emma Leroy</h3>
-                <p class="professionnel-specialite">Gestalt-thérapeute</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Strasbourg</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Présentiel uniquement</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : Développement personnel</span></div>
-                </div>
-                <div class="professionnel-description">Approche gestaltiste pour le développement personnel et la conscience de soi.</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Présentiel</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>48h</strong></div>
-                <a href="RDV.php?professionnel=9" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
+            </table>
 
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Dr. Antoine Simon</h3>
-                <p class="professionnel-specialite">Psychiatre</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Montpellier</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Visio et présentiel</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : Troubles de l'humeur</span></div>
-                </div>
-                <div class="professionnel-description">Psychiatre spécialisé dans le diagnostic et le traitement des troubles de l'humeur (dépression, bipolarité).</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Mixte</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>72h</strong></div>
-                <a href="RDV.php?professionnel=10" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
+        <?php endforeach; ?>
 
-        <!-- 🧠 SPÉCIALISTES DES TROUBLES SPÉCIFIQUES -->
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Manon Blanc</h3>
-                <p class="professionnel-specialite">Psychotraumatologue</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Rennes</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Présentiel et visio</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : EMDR, Trauma</span></div>
-                </div>
-                <div class="professionnel-description">Spécialiste en psychotraumatologie et thérapie EMDR pour le traitement des traumatismes.</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Mixte</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>96h</strong></div>
-                <a href="RDV.php?professionnel=11" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
-
-        <!-- 🌍 THÉRAPIES INTÉGRATIVES & APPROCHES INNOVANTES -->
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Mélanie Weber</h3>
-                <p class="professionnel-specialite">Thérapeute ACT</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Metz</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Visio et présentiel</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : Acceptation, Engagement</span></div>
-                </div>
-                <div class="professionnel-description">Thérapie d'Acceptation et d'Engagement pour développer la flexibilité psychologique.</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Mixte</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>48h</strong></div>
-                <a href="RDV.php?professionnel=21" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
-
-        <!-- 💼 SPÉCIALISTES EN MILIEU PROFESSIONNEL -->
-        <div class="professionnel-card">
-            <div class="professionnel-header">
-                <h3 class="professionnel-nom">Julie Fournier</h3>
-                <p class="professionnel-specialite">Psychologue QVT</p>
-            </div>
-            <div class="professionnel-content">
-                <div class="professionnel-info">
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Paris 10e</span></div>
-                    <div class="info-item"><i class="fas fa-laptop-house"></i><span>Visio et messagerie</span></div>
-                    <div class="info-item"><i class="fas fa-user-md"></i><span>Spécialité : Qualité de vie au travail</span></div>
-                </div>
-                <div class="professionnel-description">Expert en qualité de vie au travail et prévention des risques psychosociaux en entreprise.</div>
-                <div class="badges-container">
-                    <span class="badge badge-mode">Visio</span>
-                    <span class="badge badge-disponible"><i class="fas fa-check-circle"></i> Disponible</span>
-                </div>
-            </div>
-            <div class="professionnel-footer">
-                <div class="delai-reponse"><i class="fas fa-clock"></i> Délai : <strong>24h</strong></div>
-                <a href="RDV.php?professionnel=31" class="btn-rdv"><i class="fas fa-calendar-check"></i> Prendre RDV</a>
-            </div>
-        </div>
     </div>
 </section>
+
 
 <footer class="footer">
     <div class="container">
@@ -729,6 +426,7 @@
                 <h4>Bien-être Étudiant</h4>
                 <p>Votre santé mentale est notre priorité</p>
             </div>
+
             <div class="footer-col">
                 <h4>Navigation</h4>
                 <ul>
@@ -738,7 +436,22 @@
                     <li><a href="FAQ.php">FAQ</a></li>
                 </ul>
             </div>
+
             <div class="footer-col">
-                <h4>Informations</h4>
+                <h4>Urgences</h4>
                 <ul>
-                    <li><a href="#apropos">
+                    <li>3114 - Numéro national</li>
+                    <li>Nightline - Écoute étudiante</li>
+                    <li>15 - SAMU</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Bien-être Étudiant. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

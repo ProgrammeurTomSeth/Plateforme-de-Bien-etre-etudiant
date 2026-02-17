@@ -6,10 +6,10 @@
 }
 
 :root {
-    --primary-color: #5DD5D5;
-    --primary-dark: #4AB8B8;
-    --secondary-color: #7B68EE;
-    --bg-light: #5dd5d5;
+    --primary-color: #a8c9d4;
+    --primary-dark: #a8c9d4;
+    --secondary-color: #a8c9d4;
+    --bg-light: #a8c9d4;
     --bg-white: #FFFFFF;
     --text-dark: #2C3E50;
     --text-light: #6B7280;
@@ -51,7 +51,7 @@ body {
 
 .logo img {
     height: 50px;
-    background: #5dd5d5;
+    background: #a8c9d4;
     padding: 5px 10px;
     border-radius: 8px;
 }

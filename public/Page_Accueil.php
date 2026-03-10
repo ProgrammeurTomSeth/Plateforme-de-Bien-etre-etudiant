@@ -1,6 +1,5 @@
 <?php
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,7 +14,6 @@
             <div class="logo">
                 <img src="../css/bien-être%20étudiant%20(1)_page-0001.jpg" alt="Bien-être Étudiant">
             </div>
-
             <ul class="nav-menu">
                 <li class="nav-item active">
                     <a href="Page_Accueil.php" class="nav-link">
@@ -38,11 +36,9 @@
                     </a>
                 </li>
             </ul>
-
             <button class="btn-login">LOGIN</button>
         </div>
     </nav>
-
     <section class="hero">
         <div class="hero-content">
             <p class="hero-subtitle">Une réponse en moins de 24h pour votre bien-être</p>
@@ -52,7 +48,6 @@
             </div>
         </div>
     </section>
-
     <section class="services">
         <div class="container">
             <h2 class="section-title">Nos Services</h2>
@@ -78,7 +73,6 @@
             </div>
         </div>
     </section>
-
     <section class="stats">
         <div class="container">
             <div class="stats-grid">
@@ -87,7 +81,7 @@
                     <div class="stat-label">Professionnels</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number"><24h</div>
+                    <div class="stat-number">- 24h</div>
                     <div class="stat-label">Temps de réponse</div>
                 </div>
                 <div class="stat-item">
@@ -101,7 +95,6 @@
             </div>
         </div>
     </section>
-
     <section class="how-it-works">
         <div class="container">
             <h2 class="section-title">Comment ça marche ?</h2>
@@ -129,7 +122,6 @@
             </div>
         </div>
     </section>
-
     <section class="testimonials">
         <div class="container">
             <h2 class="section-title">Ils témoignent</h2>
@@ -149,7 +141,6 @@
             </div>
         </div>
     </section>
-
     <section class="cta">
         <div class="container">
             <h2>Prêt à prendre soin de vous ?</h2>
@@ -157,7 +148,6 @@
             <button class="btn btn-primary btn-large">Créer mon compte gratuitement</button>
         </div>
     </section>
-
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">

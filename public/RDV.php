@@ -2,10 +2,8 @@
 $pdo = new PDO("mysql:host=localhost;dbname=consultation_db;charset=utf8", "root", "", [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
-
 // Date sélectionnée par l'utilisateur
 $date = isset($_GET['date']) ? $_GET['date'] : null;
-
 $profs = [];
 if($date) {
     $stmt = $pdo->prepare("
@@ -20,7 +18,6 @@ if($date) {
     ");
     $stmt->execute(['date' => $date]);
     $rdvs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     // Regrouper par professionnel
     foreach($rdvs as $r) {
         $profs[$r['id_professionel']]['nom'] = $r['nom_professionel'];
@@ -29,7 +26,6 @@ if($date) {
     }
 }
 ?>
-
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -59,16 +55,13 @@ if($date) {
         <a href="FAQ.php">FAQ</a>
     </div>
 </nav>
-
 <div class="container">
     <h1>Bienvenue sur Bien-être Étudiant</h1>
     <p>Choisissez un jour pour voir les disponibilités des professionnels :</p>
-
     <div class="calendar-section">
         <input type="date" id="date-picker" min="<?= date('Y-m-d') ?>" value="<?= $date ?? '' ?>">
         <button id="voir-disponibilites">Voir Disponibilités</button>
     </div>
-
     <?php if($date): ?>
         <h2>Disponibilités pour le <?= date('d/m/Y', strtotime($date)) ?></h2>
         <?php if(!empty($profs)): ?>
@@ -101,7 +94,6 @@ if($date) {
         <?php endif; ?>
     <?php endif; ?>
 </div>
-
 <script>
     document.getElementById('voir-disponibilites').addEventListener('click', function() {
         const date = document.getElementById('date-picker').value;
@@ -112,7 +104,6 @@ if($date) {
         }
     });
 </script>
-
 <footer class="footer" style="background:#264653; color:white; padding:20px; text-align:center;">
     &copy; 2025 Bien-être Étudiant
 </footer>

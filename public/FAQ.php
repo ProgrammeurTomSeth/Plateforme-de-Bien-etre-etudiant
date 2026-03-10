@@ -1,7 +1,6 @@
 <?php
 $pdo = new PDO("mysql:host=localhost;dbname=consultation_db;charset=utf8", "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,7 +15,6 @@ $pdo = new PDO("mysql:host=localhost;dbname=consultation_db;charset=utf8", "root
         <div class="logo">
             <img src="../css/bien-être%20étudiant%20(1)_page-0001.jpg" alt="Bien-être Étudiant">
         </div>
-
         <ul class="nav-menu">
             <li class="nav-item active">
                 <a href="Page_Accueil.php" class="nav-link">
@@ -39,19 +37,15 @@ $pdo = new PDO("mysql:host=localhost;dbname=consultation_db;charset=utf8", "root
                 </a>
             </li>
         </ul>
-
         <button class="btn-login">LOGIN</button>
     </div>
 </nav>
-
 <section class="hero">
     <div class="hero-content">
         <div class="hero-buttons">
         </div>
     </div>
 </section>
-
-
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">

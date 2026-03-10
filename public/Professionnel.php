@@ -9,24 +9,10 @@ $pdo = new PDO(
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]
 );
-
 /* Récupération des professionnels actifs */
-$sql = "
-    SELECT 
-        p.id_professionel,
-        p.nom,
-        p.prenom,
-        p.specialiste,
-        p.mode_consultation,
-        p.statut
-    FROM PROFESSIONEL p
-    WHERE p.statut_site = 'actif'
-    ORDER BY p.nom
-";
-
+$sql = "SELECT p.id_professionel, p.nom, p.prenom, p.specialiste, p.mode_consultation, p.statut FROM PROFESSIONEL p WHERE p.statut_site = 'actif' ORDER BY p.nom";
 $professionnels = $pdo->query($sql)->fetchAll();
 ?>
-
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -42,49 +28,41 @@ $professionnels = $pdo->query($sql)->fetchAll();
             padding: 60px 20px;
             text-align: center;
         }
-
         .professionnels-header h1 {
             font-size: 2.8rem;
             margin-bottom: 20px;
         }
-
         .professionnels-header p {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
             opacity: 0.9;
         }
-
         .filtres-section {
             background-color: white;
             padding: 40px 20px;
             box-shadow: var(--shadow);
             margin-bottom: 40px;
         }
-
         .filtres-container {
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .filtres-form {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin-bottom: 20px;
         }
-
         .filtre-group {
             display: flex;
             flex-direction: column;
         }
-
         .filtre-group label {
             margin-bottom: 8px;
             font-weight: 600;
             color: var(--text-dark);
         }
-
         .filtre-group select,
         .filtre-group input {
             padding: 12px 15px;
@@ -93,20 +71,17 @@ $professionnels = $pdo->query($sql)->fetchAll();
             font-size: 1rem;
             transition: border-color 0.3s ease;
         }
-
         .filtre-group select:focus,
         .filtre-group input:focus {
             outline: none;
             border-color: var(--primary-color);
         }
-
         .btn-filtres {
             display: flex;
             gap: 15px;
             justify-content: center;
             margin-top: 20px;
         }
-
         .btn-filter {
             background-color: var(--secondary-color);
             color: white;
@@ -117,12 +92,10 @@ $professionnels = $pdo->query($sql)->fetchAll();
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .btn-filter:hover {
             background-color: #6854D4;
             transform: translateY(-2px);
         }
-
         .btn-reset {
             background-color: var(--text-light);
             color: white;
@@ -136,25 +109,21 @@ $professionnels = $pdo->query($sql)->fetchAll();
             display: inline-block;
             text-align: center;
         }
-
         .btn-reset:hover {
             background-color: #4a5568;
             transform: translateY(-2px);
         }
-
         .professionnels-grid {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-
         .professionnels-list {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
             margin-bottom: 50px;
         }
-
         .professionnel-card {
             background-color: white;
             border-radius: 15px;
@@ -164,39 +133,32 @@ $professionnels = $pdo->query($sql)->fetchAll();
             display: flex;
             flex-direction: column;
         }
-
         .professionnel-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
         }
-
         .professionnel-header {
             background-color: var(--primary-color);
             color: white;
             padding: 25px;
             text-align: center;
         }
-
         .professionnel-nom {
             font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 5px;
         }
-
         .professionnel-specialite {
             font-size: 1.1rem;
             opacity: 0.9;
         }
-
         .professionnel-content {
             padding: 25px;
             flex-grow: 1;
         }
-
         .professionnel-info {
             margin-bottom: 20px;
         }
-
         .info-item {
             display: flex;
             align-items: center;
@@ -204,25 +166,21 @@ $professionnels = $pdo->query($sql)->fetchAll();
             margin-bottom: 10px;
             color: var(--text-light);
         }
-
         .info-item i {
             color: var(--primary-color);
             width: 20px;
         }
-
         .professionnel-description {
             color: var(--text-dark);
             line-height: 1.6;
             margin-bottom: 20px;
         }
-
         .badges-container {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 20px;
         }
-
         .badge {
             background-color: var(--bg-light);
             color: var(--text-dark);
@@ -231,29 +189,24 @@ $professionnels = $pdo->query($sql)->fetchAll();
             font-size: 0.9rem;
             font-weight: 500;
         }
-
         .badge-mode {
             background-color: var(--secondary-color);
             color: white;
         }
-
         .badge-disponible {
             background-color: #4CAF50;
             color: white;
         }
-
         .professionnel-footer {
             padding: 0 25px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .delai-reponse {
             color: var(--text-light);
             font-size: 0.9rem;
         }
-
         .btn-rdv {
             background-color: var(--secondary-color);
             color: white;
@@ -266,41 +219,34 @@ $professionnels = $pdo->query($sql)->fetchAll();
             transition: all 0.3s ease;
             display: inline-block;
         }
-
         .btn-rdv:hover {
             background-color: #6854D4;
             transform: translateY(-2px);
         }
-
         .no-results {
             text-align: center;
             padding: 60px 20px;
             grid-column: 1 / -1;
         }
-
         .no-results h3 {
             font-size: 1.8rem;
             color: var(--text-dark);
             margin-bottom: 20px;
         }
-
         .no-results p {
             color: var(--text-light);
             margin-bottom: 30px;
         }
-
         .results-count {
             text-align: center;
             color: var(--text-light);
             margin-bottom: 30px;
             font-size: 1.1rem;
         }
-
         .results-count span {
             font-weight: bold;
             color: var(--primary-color);
         }
-
         .filtres-actifs {
             background-color: #f8f9fa;
             padding: 15px;
@@ -308,27 +254,22 @@ $professionnels = $pdo->query($sql)->fetchAll();
             margin-top: 20px;
             border-left: 4px solid var(--primary-color);
         }
-
         .filtres-actifs p {
             margin: 0;
             color: var(--text-dark);
         }
-
         @media (max-width: 768px) {
             .filtres-form {
                 grid-template-columns: 1fr;
             }
-
             .professionnels-list {
                 grid-template-columns: 1fr;
             }
-
             .professionnel-footer {
                 flex-direction: column;
                 gap: 15px;
                 align-items: stretch;
             }
-
             .btn-filtres {
                 flex-direction: column;
             }
@@ -336,43 +277,33 @@ $professionnels = $pdo->query($sql)->fetchAll();
     </style>
 </head>
 <body>
-
 <nav class="navbar">
     <div class="nav-container">
         <div class="logo">
             <img src="../css/bien-être étudiant (1)_page-0001.jpg" alt="Bien-être Étudiant">
         </div>
-
         <ul class="nav-menu">
-            <li class="nav-item"><a href="Page_Accueil.php" class="nav-link">Accueil</a>
-            </li>
+            <li class="nav-item"><a href="Page_Accueil.php" class="nav-link">Accueil</a></li>
             <li class="nav-item active"><a href="Professionnel.php" class="nav-link">Professionnels</a></li>
             <li class="nav-item"><a href="RDV.php" class="nav-link">Prendre RDV</a></li>
             <li class="nav-item"><a href="FAQ.php" class="nav-link">FAQ</a></li>
         </ul>
-
         <button class="btn-login">LOGIN</button>
     </div>
 </nav>
-
 <section class="hero">
     <div class="hero-content">
         <h1>Nos professionnels de santé</h1>
         <p>Des spécialistes à votre écoute</p>
     </div>
 </section>
-
 <section class="professionnels">
     <div class="container">
-
         <?php if (empty($professionnels)) : ?>
             <p>Aucun professionnel disponible actuellement.</p>
         <?php endif; ?>
-
         <?php foreach ($professionnels as $pro) : ?>
-
             <table border="1" width="800" style="margin:30px auto; border-collapse:collapse;">
-
                 <tr>
                     <th colspan="2">
                         <?= htmlspecialchars($pro['prenom'] . ' ' . $pro['nom']) ?>
@@ -380,7 +311,6 @@ $professionnels = $pdo->query($sql)->fetchAll();
                         <small><?= htmlspecialchars($pro['specialiste']) ?></small>
                     </th>
                 </tr>
-
                 <tr>
                     <td width="250" align="center">
                         <img src="../images/default-medecin.png"
@@ -392,10 +322,8 @@ $professionnels = $pdo->query($sql)->fetchAll();
                         <br>
                         <div><strong>Statut :</strong> <?= htmlspecialchars($pro['statut']) ?></div>
                     </td>
-
                     <td>
                         <div><strong>Horaires</strong></div><br>
-
                         <div>Lundi : 09h00 - 17h00</div><br>
                         <div>Mardi : 09h00 - 17h00</div><br>
                         <div>Mercredi : 09h00 - 17h00</div><br>
@@ -403,22 +331,16 @@ $professionnels = $pdo->query($sql)->fetchAll();
                         <div>Vendredi : 09h00 - 16h00</div><br>
                         <div>Samedi : Fermé</div><br>
                         <div>Dimanche : Fermé</div><br>
-
                         <br>
                         <a href="RDV.php?id_professionel=<?= $pro['id_professionel'] ?>">
                             ➜ Prendre rendez-vous
                         </a>
                     </td>
                 </tr>
-
             </table>
-
         <?php endforeach; ?>
-
     </div>
 </section>
-
-
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">
@@ -452,6 +374,5 @@ $professionnels = $pdo->query($sql)->fetchAll();
         </div>
     </div>
 </footer>
-
 </body>
 </html>

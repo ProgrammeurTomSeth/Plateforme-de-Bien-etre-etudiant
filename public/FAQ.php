@@ -91,5 +91,6 @@ $pdo = new PDO("mysql:host=localhost;dbname=consultation_db;charset=utf8", "root
         </div>
     </div>
 </footer>
+
 </body>
 </html>

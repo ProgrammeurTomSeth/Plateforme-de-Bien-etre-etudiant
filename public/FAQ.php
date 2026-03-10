@@ -27,7 +27,7 @@ $pdo = new PDO("mysql:host=localhost;dbname=consultation_db;charset=utf8", "root
                 </a>
             </li>
             <li class="nav-item">
-                <a href="RDV.php" class="nav-link">
+                <a href="../calendrier/index.php" class="nav-link">
                     <span class="icon">Prendre RDV</span>
                 </a>
             </li>
@@ -85,5 +85,6 @@ $pdo = new PDO("mysql:host=localhost;dbname=consultation_db;charset=utf8", "root
         </div>
     </div>
 </footer>
+
 </body>
 </html>

@@ -1,346 +1,399 @@
 <!DOCTYPE html>
-<?php
-$pdo = new PDO(
-        "mysql:host=localhost;dbname=consultation_db;charset=utf8",
-        "root",
-        "",
-        [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ]
-);
-/* Récupération des professionnels actifs */
-$sql = "SELECT p.id_professionel, p.nom, p.prenom, p.specialiste, p.mode_consultation, p.statut FROM PROFESSIONEL p WHERE p.statut_site = 'actif' ORDER BY p.nom";
-$professionnels = $pdo->query($sql)->fetchAll();
-?>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professionnels - Bien-être Étudiant</title>
+    <title>Bien-être Étudiant - Professionnels</title>
     <link rel="stylesheet" href="../css/Page_Accueil.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Styles spécifiques pour la page professionnels */
-        .professionnels-header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
+        /* Styles supplémentaires pour l'annuaire - Harmonisé avec #6EC0D0 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
         }
-        .professionnels-header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
+
+        .psy-container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
-        .professionnels-header p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0.9;
-        }
-        .filtres-section {
-            background-color: white;
-            padding: 40px 20px;
-            box-shadow: var(--shadow);
-            margin-bottom: 40px;
-        }
-        .filtres-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .filtres-form {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .filtre-group {
+
+        .psy-header {
             display: flex;
-            flex-direction: column;
-        }
-        .filtre-group label {
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-        .filtre-group select,
-        .filtre-group input {
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-        .filtre-group select:focus,
-        .filtre-group input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-        .btn-filtres {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .btn-filter {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .btn-filter:hover {
-            background-color: #6854D4;
-            transform: translateY(-2px);
-        }
-        .btn-reset {
-            background-color: var(--text-light);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-        .btn-reset:hover {
-            background-color: #4a5568;
-            transform: translateY(-2px);
-        }
-        .professionnels-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .professionnels-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        .professionnel-card {
-            background-color: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .professionnel-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-        .professionnel-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-        .professionnel-nom {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .professionnel-specialite {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        .professionnel-content {
-            padding: 25px;
-            flex-grow: 1;
-        }
-        .professionnel-info {
-            margin-bottom: 20px;
-        }
-        .info-item {
-            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            color: var(--text-light);
+            margin-bottom: 2rem;
         }
-        .info-item i {
-            color: var(--primary-color);
-            width: 20px;
+
+        .psy-header h1 {
+            font-size: 2rem;
+            color: #2C3E50;
+            border-left: 8px solid #6EC0D0;
+            padding-left: 1.2rem;
         }
-        .professionnel-description {
-            color: var(--text-dark);
-            line-height: 1.6;
-            margin-bottom: 20px;
+
+        .btn-rdv {
+            background: #6EC0D0;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 3rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+            border: 2px solid transparent;
         }
-        .badges-container {
+
+        .btn-rdv:hover {
+            background: #5BA3B0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 192, 208, 0.3);
+        }
+
+        .filters {
+            background: white;
+            border-radius: 3rem;
+            padding: 1.2rem 1.8rem;
+            margin-bottom: 2rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
+            align-items: center;
+            gap: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
         }
+
         .badge {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            padding: 5px 15px;
-            border-radius: 20px;
+            background: #f0f7fa;
+            padding: 0.5rem 1.3rem;
+            border-radius: 3rem;
+            font-weight: 600;
             font-size: 0.9rem;
+            color: #2C3E50;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge:hover {
+            background: #e1f0f5;
+            border-color: #6EC0D0;
+        }
+
+        .badge.active {
+            background: #6EC0D0;
+            color: white;
+            border-color: #5BA3B0;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            border-radius: 3rem;
+            padding-left: 1.5rem;
+            border: 1px solid #cbd5e1;
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            padding: 0.8rem 0.5rem;
+            width: 100%;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            background: #6EC0D0;
+            border: none;
+            color: white;
+            padding: 0.6rem 1.8rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .search-bar button:hover {
+            background: #5BA3B0;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.5rem 0 1rem;
             font-weight: 500;
+            color: #2C3E50;
         }
-        .badge-mode {
-            background-color: var(--secondary-color);
-            color: white;
+
+        .reset {
+            color: #6EC0D0;
+            background: none;
+            border: none;
+            font-weight: 600;
+            text-decoration: underline dotted;
+            cursor: pointer;
+            font-size: 1rem;
         }
-        .badge-disponible {
-            background-color: #4CAF50;
-            color: white;
+
+        .reset:hover {
+            color: #5BA3B0;
         }
-        .professionnel-footer {
-            padding: 0 25px 25px;
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid #dde3ea;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: #6EC0D0;
+            background: #f9fcff;
+            box-shadow: 0 10px 25px rgba(110, 192, 208, 0.1);
+        }
+
+        .card.selected {
+            background: #e1f0f5;
+            border: 2px solid #6EC0D0;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            color: #2C3E50;
+            margin-bottom: 0.2rem;
+        }
+
+        .card .ville {
+            color: #5a6f84;
+            font-weight: 500;
+            margin: 0.3rem 0 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .modalities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 0.7rem 0;
+        }
+
+        .mod {
+            background: #f0f7fa;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #2C3E50;
+            border: 1px solid #d0e2eb;
+        }
+
+        .tags {
+            background: #f8fafc;
+            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            border: 1px solid #e2eaf2;
+        }
+
+        .card-footer {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #607a93;
+            border-top: 1px dashed #d0e2eb;
+            padding-top: 0.7rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .delai-reponse {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-        .btn-rdv {
-            background-color: var(--secondary-color);
+
+        .btn-prendre-rdv {
+            background: #6EC0D0;
             color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
             text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: 0.2s;
         }
-        .btn-rdv:hover {
-            background-color: #6854D4;
-            transform: translateY(-2px);
+
+        .btn-prendre-rdv:hover {
+            background: #5BA3B0;
+            transform: scale(1.05);
         }
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            grid-column: 1 / -1;
+
+        .detail-panel {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.8rem 2rem;
+            margin: 2rem 0 1rem;
+            border: 2px solid #6EC0D0;
+            display: none;
+            box-shadow: 0 10px 25px rgba(110, 192, 208, 0.15);
         }
-        .no-results h3 {
-            font-size: 1.8rem;
-            color: var(--text-dark);
-            margin-bottom: 20px;
+
+        .detail-panel h2 {
+            margin-bottom: 1rem;
+            color: #2C3E50;
+            border-bottom: 2px solid #f0f7fa;
+            padding-bottom: 0.5rem;
         }
-        .no-results p {
-            color: var(--text-light);
-            margin-bottom: 30px;
+
+        .detail-row {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.8rem 2rem;
+            max-width: 700px;
         }
-        .results-count {
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 30px;
-            font-size: 1.1rem;
+
+        .detail-row span:first-child {
+            font-weight: 600;
+            color: #6EC0D0;
         }
-        .results-count span {
-            font-weight: bold;
-            color: var(--primary-color);
+
+        .close-detail {
+            margin-top: 1.5rem;
+            background: white;
+            border: 2px solid #6EC0D0;
+            color: #6EC0D0;
+            padding: 0.4rem 2rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
         }
-        .filtres-actifs {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border-left: 4px solid var(--primary-color);
+
+        .close-detail:hover {
+            background: #6EC0D0;
+            color: white;
         }
-        .filtres-actifs p {
-            margin: 0;
-            color: var(--text-dark);
-        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .filtres-form {
-                grid-template-columns: 1fr;
-            }
-            .professionnels-list {
-                grid-template-columns: 1fr;
-            }
-            .professionnel-footer {
+            .psy-header {
                 flex-direction: column;
-                gap: 15px;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .filters {
+                flex-direction: column;
                 align-items: stretch;
             }
-            .btn-filtres {
-                flex-direction: column;
+
+            .search-bar {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-<nav class="navbar">
+<?php
+// Connexion à la base de données
+$pdo = new PDO("mysql:host=localhost;dbname=consultation_db;charset=utf8", "root", "", array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+?>
+
+<nav class="navbar" style="background-color: #6EC0D0;">
     <div class="nav-container">
         <div class="logo">
-            <img src="../css/bien-être étudiant (1)_page-0001.jpg" alt="Bien-être Étudiant">
+            <img src="../css/bien-être%20étudiant%20(1)_page-0001.jpg" alt="Bien-être Étudiant">
         </div>
+
         <ul class="nav-menu">
-            <li class="nav-item"><a href="Page_Accueil.php" class="nav-link">Accueil</a></li>
-            <li class="nav-item active"><a href="Professionnel.php" class="nav-link">Professionnels</a></li>
-            <li class="nav-item"><a href="RDV.php" class="nav-link">Prendre RDV</a></li>
-            <li class="nav-item"><a href="FAQ.php" class="nav-link">FAQ</a></li>
+            <li class="nav-item">
+                <a href="Page_Accueil.php" class="nav-link" style="color: white;">
+                    <span class="icon">Accueil</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="Professionnel.php" class="nav-link" style="color: white; font-weight: 600;">
+                    <span class="icon">Professionnels</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../calendrier/index.php" class="nav-link" style="color: white;">
+                    <span class="icon">Prendre RDV</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="FAQ.php" class="nav-link" style="color: white;">
+                    <span class="icon">FAQ</span>
+                </a>
+            </li>
         </ul>
-        <button class="btn-login">LOGIN</button>
+
+        <button class="btn-login" style="background: white; color: #6EC0D0; border: none;">LOGIN</button>
     </div>
 </nav>
-<section class="hero">
-    <div class="hero-content">
-        <h1>Nos professionnels de santé</h1>
-        <p>Des spécialistes à votre écoute</p>
+
+<div class="psy-container">
+    <div class="psy-header">
+        <h1>🧠 Annuaire des psychologues</h1>
+        <a href="RDV.php" class="btn-rdv">📅 Prendre rendez-vous</a>
     </div>
-</section>
-<section class="professionnels">
-    <div class="container">
-        <?php if (empty($professionnels)) : ?>
-            <p>Aucun professionnel disponible actuellement.</p>
-        <?php endif; ?>
-        <?php foreach ($professionnels as $pro) : ?>
-            <table border="1" width="800" style="margin:30px auto; border-collapse:collapse;">
-                <tr>
-                    <th colspan="2">
-                        <?= htmlspecialchars($pro['prenom'] . ' ' . $pro['nom']) ?>
-                        <br>
-                        <small><?= htmlspecialchars($pro['specialiste']) ?></small>
-                    </th>
-                </tr>
-                <tr>
-                    <td width="250" align="center">
-                        <img src="../images/default-medecin.png"
-                             alt="Photo médecin"
-                             width="200">
-                        <br><br>
-                        <div><strong>Consultation :</strong></div>
-                        <div><?= htmlspecialchars($pro['mode_consultation']) ?></div>
-                        <br>
-                        <div><strong>Statut :</strong> <?= htmlspecialchars($pro['statut']) ?></div>
-                    </td>
-                    <td>
-                        <div><strong>Horaires</strong></div><br>
-                        <div>Lundi : 09h00 - 17h00</div><br>
-                        <div>Mardi : 09h00 - 17h00</div><br>
-                        <div>Mercredi : 09h00 - 17h00</div><br>
-                        <div>Jeudi : 09h00 - 17h00</div><br>
-                        <div>Vendredi : 09h00 - 16h00</div><br>
-                        <div>Samedi : Fermé</div><br>
-                        <div>Dimanche : Fermé</div><br>
-                        <br>
-                        <a href="RDV.php?id_professionel=<?= $pro['id_professionel'] ?>">
-                            ➜ Prendre rendez-vous
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        <?php endforeach; ?>
+
+    <!-- FILTRES -->
+    <div class="filters">
+        <span class="badge active" data-filter="tous">🔵 tous</span>
+        <span class="badge" data-filter="clinique">👥 clinique</span>
+        <span class="badge" data-filter="troubles">🧠 troubles spécifiques</span>
+        <span class="badge" data-filter="integrative">🌿 intégratif</span>
+        <span class="badge" data-filter="professionnel">💼 travail</span>
+        <span class="badge" data-filter="enfance">👶 enfance</span>
+        <span class="badge" data-filter="enligne">📱 en ligne</span>
+        <span class="badge" data-filter="familiale">👪 famille</span>
+        <span class="badge" data-filter="corporelle">🧘 corps</span>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="nom, ville, mot-clé...">
+            <button id="searchBtn">chercher</button>
+        </div>
     </div>
-</section>
+
+    <!-- STATS + RESET -->
+    <div class="stats">
+        <span id="compteur">XX professionnels</span>
+        <button class="reset" id="resetBtn">↺ réinitialiser</button>
+    </div>
+
+    <!-- ZONE DÉTAIL (clic) -->
+    <div class="detail-panel" id="detailPanel">
+        <h2>📋 Détail du professionnel</h2>
+        <div class="detail-row" id="detailContent"></div>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button class="close-detail" id="closeDetail">✕ fermer</button>
+            <a href="../calendrier/index.php" class="btn-rdv" style="padding: 0.4rem 2rem; font-size: 0.9rem;">Prendre RDV</a>
+        </div>
+    </div>
+
+    <!-- GRILLE CARTES -->
+    <div class="cards" id="cardsContainer"></div>
+</div>
+
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">
@@ -348,17 +401,24 @@ $professionnels = $pdo->query($sql)->fetchAll();
                 <h4>Bien-être Étudiant</h4>
                 <p>Votre santé mentale est notre priorité</p>
             </div>
-
             <div class="footer-col">
                 <h4>Navigation</h4>
                 <ul>
                     <li><a href="Page_Accueil.php">Accueil</a></li>
                     <li><a href="Professionnel.php">Professionnels</a></li>
-                    <li><a href="RDV.php">Prendre RDV</a></li>
+                    <li><a href="../calendrier/index.php">Prendre RDV</a></li>
                     <li><a href="FAQ.php">FAQ</a></li>
                 </ul>
             </div>
-
+            <div class="footer-col">
+                <h4>Informations</h4>
+                <ul>
+                    <li><a href="#apropos">À propos</a></li>
+                    <li><a href="#confidentialite">Confidentialité</a></li>
+                    <li><a href="#mentions">Mentions légales</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
             <div class="footer-col">
                 <h4>Urgences</h4>
                 <ul>
@@ -368,11 +428,171 @@ $professionnels = $pdo->query($sql)->fetchAll();
                 </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
             <p>&copy; 2025 Bien-être Étudiant. Tous droits réservés.</p>
         </div>
     </div>
 </footer>
+
+<script>
+    (function() {
+        // Données des professionnels (à remplacer par des données PHP plus tard)
+        const pros = [
+            { name: "Dr. Sophie Martin", title: "Psychologue clinicienne", city: "Paris 15e", tags: ["TCC", "Anxiété"], modality: ["Visio","Présentiel"], category: "clinique" },
+            { name: "Thomas Dubois", title: "Psychothérapeute", city: "Lyon 2e", tags: ["Thérapie systémique"], modality: ["Visio","Présentiel","Messagerie"], category: "clinique" },
+            { name: "Camille Laurent", title: "Psychologue", city: "Marseille", tags: ["Burn-out","Estime de soi"], modality: ["Présentiel","Visio"], category: "clinique" },
+            { name: "Nicolas Moreau", title: "Neuropsychologue", city: "Toulouse", tags: ["TDAH","Troubles apprentissage"], modality: ["Présentiel"], category: "clinique" },
+            { name: "Laura Petit", title: "Psychologue du travail", city: "Bordeaux", tags: ["Stress professionnel"], modality: ["Visio","Messagerie"], category: "professionnel" },
+            { name: "Manon Blanc", title: "Psychotraumatologue", city: "Rennes", tags: ["EMDR","Trauma"], modality: ["Présentiel","Visio"], category: "troubles" },
+            { name: "Lucas Michel", title: "Addictologue", city: "Grenoble", tags: ["Dépendances"], modality: ["Présentiel","Messagerie"], category: "troubles" },
+            { name: "Inès Garcia", title: "Psychologue TCA", city: "Dijon", tags: ["Troubles alimentaires"], modality: ["Présentiel","Visio"], category: "troubles" },
+            { name: "Mélanie Weber", title: "Thérapeute ACT", city: "Metz", tags: ["Acceptation","Engagement"], modality: ["Visio","Présentiel"], category: "integrative" },
+            { name: "Clara Klein", title: "Art-thérapeute", city: "Caen", tags: ["Expression créative"], modality: ["Présentiel"], category: "integrative" },
+            { name: "Julie Fournier", title: "Psychologue QVT", city: "Paris 10e", tags: ["Qualité de vie"], modality: ["Visio","Messagerie"], category: "professionnel" },
+            { name: "Quentin Rousseau", title: "Coach résilience", city: "Lyon", tags: ["Burn-out","Retour"], modality: ["Visio"], category: "professionnel" },
+            { name: "Marion Guérin", title: "Psychologue scolaire", city: "Paris 5e", tags: ["Difficultés scolaires"], modality: ["Présentiel"], category: "enfance" },
+            { name: "Rémy Fontaine", title: "Spécialiste TDAH", city: "Lyon", tags: ["TDAH"], modality: ["Présentiel","Visio"], category: "enfance" },
+            { name: "Sabrina Leroy", title: "Psychologue 100% visio", city: "Paris", tags: ["Expats"], modality: ["Visio"], category: "enligne" },
+            { name: "Cédric Mora", title: "Thérapeute asynchrone", city: "Lyon", tags: ["Messagerie"], modality: ["Messagerie"], category: "enligne" },
+            { name: "Clémence Barbier", title: "Thérapeute familiale", city: "Rennes", tags: ["Systèmes familiaux"], modality: ["Présentiel"], category: "familiale" },
+            { name: "Jules Perrot", title: "Médiateur familial", city: "Grenoble", tags: ["Conflits","Séparation"], modality: ["Présentiel","Visio"], category: "familiale" },
+            { name: "Marie-Christine Duval", title: "Sophrologue", city: "Metz", tags: ["Relaxation"], modality: ["Présentiel"], category: "corporelle" },
+            { name: "François-Xavier Lambert", title: "Psychologue énergéticien", city: "Besançon", tags: ["Médecine chinoise"], modality: ["Présentiel"], category: "corporelle" },
+            { name: "Alexis Costa", title: "Spécialiste autisme", city: "Nantes", tags: ["TSA"], modality: ["Présentiel"], category: "enfance" },
+            { name: "Anna Kowalski", title: "Psychologue deuil périnatal", city: "Nantes", tags: ["Perte"], modality: ["Présentiel","Messagerie"], category: "troubles" }
+        ];
+
+        // État
+        let filterCategory = "tous";
+        let searchText = "";
+        let selectedPro = null;
+
+        // Éléments DOM
+        const container = document.getElementById('cardsContainer');
+        const compteurSpan = document.getElementById('compteur');
+        const detailPanel = document.getElementById('detailPanel');
+        const detailContent = document.getElementById('detailContent');
+        const searchInput = document.getElementById('search');
+        const searchBtn = document.getElementById('searchBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const closeDetail = document.getElementById('closeDetail');
+
+        // Fonction d'affichage
+        function render() {
+            const filtered = pros.filter(p => {
+                if (filterCategory !== "tous" && p.category !== filterCategory) return false;
+                if (searchText.trim() !== '') {
+                    const term = searchText.toLowerCase();
+                    return p.name.toLowerCase().includes(term) ||
+                        p.city.toLowerCase().includes(term) ||
+                        p.title.toLowerCase().includes(term) ||
+                        p.tags.some(t => t.toLowerCase().includes(term));
+                }
+                return true;
+            });
+
+            compteurSpan.innerText = filtered.length + ' professionnel' + (filtered.length > 1 ? 's' : '');
+
+            let html = '';
+            filtered.forEach(p => {
+                const selectedClass = (selectedPro && selectedPro.name === p.name && selectedPro.city === p.city) ? 'selected' : '';
+                const modalités = p.modality.map(m => `<span class="mod">${m}</span>`).join('');
+                const tagsHtml = p.tags.map(t => `<span class="mod" style="background:#d3e2f5;">${t}</span>`).join('');
+
+                html += `
+                        <div class="card ${selectedClass}" data-name="${p.name}" data-city="${p.city}">
+                            <h3>${p.name}</h3>
+                            <div class="ville">📍 ${p.city} · ${p.title}</div>
+                            <div class="modalities">${modalités}</div>
+                            <div class="tags">🏷️ ${tagsHtml}</div>
+                            <div class="card-footer">
+                                <span>${p.category}</span>
+                                <a href="RDV.php?professionnel=${encodeURIComponent(p.name)}&ville=${encodeURIComponent(p.city)}" class="btn-prendre-rdv">Prendre RDV</a>
+                            </div>
+                        </div>
+                    `;
+            });
+            container.innerHTML = html;
+
+            if (selectedPro && !filtered.some(p => p.name === selectedPro.name && p.city === selectedPro.city)) {
+                selectedPro = null;
+                detailPanel.style.display = 'none';
+            } else if (selectedPro) {
+                showDetail(selectedPro);
+            } else {
+                detailPanel.style.display = 'none';
+            }
+        }
+
+        function showDetail(p) {
+            detailContent.innerHTML = `
+                    <span>Nom</span> <span><b>${p.name}</b></span>
+                    <span>Titre</span> <span>${p.title}</span>
+                    <span>Ville</span> <span>${p.city}</span>
+                    <span>Spécialités</span> <span>${p.tags.join(' · ')}</span>
+                    <span>Modalités</span> <span>${p.modality.join(' / ')}</span>
+                    <span>Catégorie</span> <span>${p.category}</span>
+                `;
+            detailPanel.style.display = 'block';
+        }
+
+        // Clic sur carte
+        container.addEventListener('click', (e) => {
+            const card = e.target.closest('.card');
+            if (!card || e.target.closest('.btn-prendre-rdv')) return;
+
+            const name = card.dataset.name;
+            const city = card.dataset.city;
+            const pro = pros.find(p => p.name === name && p.city === city);
+            if (pro) {
+                selectedPro = pro;
+                document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                showDetail(pro);
+            }
+        });
+
+        // Fermer détail
+        closeDetail.addEventListener('click', () => {
+            selectedPro = null;
+            detailPanel.style.display = 'none';
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+        });
+
+        // Filtres
+        document.querySelectorAll('[data-filter]').forEach(badge => {
+            badge.addEventListener('click', () => {
+                const filter = badge.dataset.filter;
+                document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+                badge.classList.add('active');
+                filterCategory = filter;
+                render();
+            });
+        });
+
+        // Recherche
+        function doSearch() {
+            searchText = searchInput.value;
+            render();
+        }
+        searchBtn.addEventListener('click', doSearch);
+        searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') doSearch(); });
+
+        // Reset
+        resetBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchText = '';
+            filterCategory = 'tous';
+            document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+            document.querySelector('[data-filter="tous"]').classList.add('active');
+            selectedPro = null;
+            detailPanel.style.display = 'none';
+            render();
+        });
+
+        // Initialisation
+        render();
+    })();
+</script>
 </body>
 </html>

@@ -13,45 +13,55 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ</title>
+    <title>Contact</title>
     <link rel="stylesheet" href="../css/Page_Accueil.css">
 
     <style>
-        .faq-section{
+
+        .contact-section{
             max-width:900px;
             margin:80px auto;
             padding:20px;
         }
 
-        .faq-title{
+        .contact-title{
             text-align:center;
             font-size:32px;
             margin-bottom:40px;
         }
 
-        .faq-item{
-            background:#ffffff;
+        .contact-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:30px;
+        }
+
+        .contact-card{
+            background:white;
+            padding:25px;
             border-radius:10px;
-            margin-bottom:15px;
             box-shadow:0 4px 10px rgba(0,0,0,0.05);
-            overflow:hidden;
         }
 
-        .faq-question{
-            padding:18px;
-            font-weight:bold;
-            cursor:pointer;
-            background:#f5f5f5;
+        .contact-card h3{
+            margin-bottom:15px;
         }
 
-        .faq-answer{
-            padding:18px;
-            display:none;
+        .contact-card p{
+            margin-bottom:10px;
             line-height:1.6;
         }
+
+        @media (max-width:768px){
+            .contact-grid{
+                grid-template-columns:1fr;
+            }
+        }
+
     </style>
 
 </head>
+
 <body>
 
 <nav class="navbar">
@@ -81,9 +91,15 @@ try {
                 </a>
             </li>
 
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a href="FAQ.php" class="nav-link">
                     <span class="icon">FAQ</span>
+                </a>
+            </li>
+
+            <li class="nav-item active">
+                <a href="contact.php" class="nav-link">
+                    <span class="icon">Contact</span>
                 </a>
             </li>
 
@@ -95,38 +111,43 @@ try {
 </nav>
 
 
-<section class="faq-section">
+<section class="contact-section">
 
-    <h1 class="faq-title">Questions fréquentes</h1>
+    <h1 class="contact-title">Nous contacter</h1>
 
-    <div class="faq-item">
-        <div class="faq-question">Comment prendre rendez-vous ?</div>
-        <div class="faq-answer">
-            Vous pouvez prendre rendez-vous directement via la page "Prendre RDV".
-            Choisissez un professionnel et sélectionnez la date disponible dans le calendrier.
+    <div class="contact-grid">
+
+        <div class="contact-card">
+            <h3>Adresse</h3>
+            <p>Bien-être Étudiant</p>
+            <p>24 Avenue de la Santé</p>
+            <p>75013 Paris</p>
+            <p>France</p>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-question">Les consultations sont-elles gratuites ?</div>
-        <div class="faq-answer">
-            Certaines consultations sont gratuites pour les étudiants selon les établissements partenaires.
-            Renseignez-vous auprès du professionnel lors de la prise de rendez-vous.
+        <div class="contact-card">
+            <h3>Téléphone</h3>
+            <p>Accueil : 01 45 67 89 00</p>
+            <p>Support étudiants : 01 45 67 89 10</p>
+            <p>Professionnels partenaires : 01 45 67 89 20</p>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <div class="faq-question">Les informations sont-elles confidentielles ?</div>
-        <div class="faq-answer">
-            Oui. Toutes les consultations respectent le secret professionnel et vos informations restent strictement confidentielles.
-        </div>
-    </div>
+        <div class="contact-card">
+            <h3>Email</h3>
+            <p>contact@bienetre-etudiant.fr</p>
 
-    <div class="faq-item">
-        <div class="faq-question">Puis-je annuler un rendez-vous ?</div>
-        <div class="faq-answer">
-            Oui, vous pouvez annuler votre rendez-vous depuis votre espace personnel ou en contactant directement le professionnel.
         </div>
+
+        <div class="contact-card">
+            <h3>Horaires</h3>
+            <p>Lundi : 9h00 - 18h00</p>
+            <p>Mardi : 9h00 - 18h00</p>
+            <p>Mercredi : 9h00 - 18h00</p>
+            <p>Jeudi : 9h00 - 18h00</p>
+            <p>Vendredi : 9h00 - 17h00</p>
+            <p>Week-end : fermé</p>
+        </div>
+
     </div>
 
 </section>
@@ -145,18 +166,19 @@ try {
             <div class="footer-col">
                 <h4>Navigation</h4>
                 <ul>
-                    <li><a href="Page_Accueil.php">Accueil</a></li>
-                    <li><a href="Professionnel.php">Professionnels</a></li>
-                    <li><a href="RDV.php">Prendre RDV</a></li>
-                    <li><a href="FAQ.php">FAQ</a></li>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#professionnels">Professionnels</a></li>
+                    <li><a href="#rdv">Prendre RDV</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                 </ul>
             </div>
+
             <div class="footer-col">
                 <h4>Informations</h4>
                 <ul>
                     <li><a href="#apropos">À propos</a></li>
-                    <li><a href="Politique de confidentialité.php">Confidentialité</a></li>
-                    <li><a href="Mentions légales.php">Mentions légales</a></li>
+                    <li><a href="#confidentialite">Confidentialité</a></li>
+                    <li><a href="#mentions">Mentions légales</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -179,26 +201,6 @@ try {
     </div>
 </footer>
 
-
-<script>
-
-    const questions = document.querySelectorAll(".faq-question");
-
-    questions.forEach(q => {
-        q.addEventListener("click", () => {
-
-            const answer = q.nextElementSibling;
-
-            if(answer.style.display === "block"){
-                answer.style.display = "none";
-            }else{
-                answer.style.display = "block";
-            }
-
-        });
-    });
-
-</script>
-
 </body>
 </html>
+

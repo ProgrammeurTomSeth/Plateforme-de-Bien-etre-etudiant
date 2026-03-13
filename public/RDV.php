@@ -104,8 +104,44 @@ if($date) {
         }
     });
 </script>
-<footer class="footer" style="background:#264653; color:white; padding:20px; text-align:center;">
-    &copy; 2025 Bien-être Étudiant
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Bien-être Étudiant</h4>
+                <p>Votre santé mentale est notre priorité</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="Page_Accueil.php">Accueil</a></li>
+                    <li><a href="Professionnel.php">Professionnels</a></li>
+                    <li><a href="RDV.php">Prendre RDV</a></li>
+                    <li><a href="FAQ.php">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Informations</h4>
+                <ul>
+                    <li><a href="#apropos">À propos</a></li>
+                    <li><a href="Politique de confidentialité.php">Confidentialité</a></li>
+                    <li><a href="Mentions légales.php">Mentions légales</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Urgences</h4>
+                <ul>
+                    <li>3114 - Numéro national</li>
+                    <li>Nightline - Écoute étudiante</li>
+                    <li>15 - SAMU</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Bien-être Étudiant. Tous droits réservés.</p>
+        </div>
+    </div>
 </footer>
 </body>
 </html>

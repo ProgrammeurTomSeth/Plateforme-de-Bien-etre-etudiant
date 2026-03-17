@@ -152,7 +152,7 @@ $professionnels = $pdo->query($sql)->fetchAll();
             <div class="footer-col">
                 <h4>Informations</h4>
                 <ul>
-                    <li><a href="#apropos">À propos</a></li>
+                    <li><a href="A propos.php">À propos</a></li>
                     <li><a href="Politique de confidentialité.php">Confidentialité</a></li>
                     <li><a href="Mentions légales.php">Mentions légales</a></li>
                     <li><a href="contact.php">Contact</a></li>

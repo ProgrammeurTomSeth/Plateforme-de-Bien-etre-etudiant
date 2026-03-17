@@ -16,6 +16,23 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conditions Globales D'utilisation</title>
     <link rel="stylesheet" href="../css/Page_Accueil.css">
+    <style>
+        h1{
+            text-align: center;
+            font-size: 25px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+        h2{
+            text-align: left;
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+        }
+        p{
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar">
@@ -48,133 +65,133 @@ try {
         <button class="btn-login">LOGIN</button>
     </div>
 </nav>
-<p> CONDITIONS GÉNÉRALES D’UTILISATION<br><br>
+<h1> CONDITIONS GÉNÉRALES D’UTILISATION</h1><br><br>
 
 **Dernière mise à jour : [date]**<br><br>
 
-1. Objet<br><br>
+<h2>1. Objet</h2><br><br>
 
-Les présentes CGU ont pour objet de définir les modalités et conditions d’utilisation du site **[Nom du site]**, plateforme de mise en relation entre étudiants et professionnels de santé mentale.<br><br>
+<p>Les présentes CGU ont pour objet de définir les modalités et conditions d’utilisation du site **[Nom du site]**, plateforme de mise en relation entre étudiants et professionnels de santé mentale.<br><br>
 
-L’accès et l’utilisation du site impliquent l’acceptation pleine et entière des présentes CGU.<br><br>
+    L’accès et l’utilisation du site impliquent l’acceptation pleine et entière des présentes CGU.</p><br><br>
 
-2. Définitions<br><br>
+<h2>2. Définitions</h2><br><br>
 
-**Utilisateur** : toute personne utilisant le site (étudiant ou professionnel de santé).<br>
-**Compte** : espace personnel créé sur la plateforme.<br>
-**Professionnel** : médecin ou praticien inscrit sur la plateforme.<br>
-**Service** : ensemble des fonctionnalités de mise en relation et de prise de rendez-vous.<br><br>
+<p>**Utilisateur** : toute personne utilisant le site (étudiant ou professionnel de santé).<br>
+    **Compte** : espace personnel créé sur la plateforme.<br>
+    **Professionnel** : médecin ou praticien inscrit sur la plateforme.<br>
+    **Service** : ensemble des fonctionnalités de mise en relation et de prise de rendez-vous.</p><br><br>
 
-3. Accès au service<br><br>
+<h2>3. Accès au service</h2><br><br>
 
-Le site est accessible :<br><br>
+<p>Le site est accessible :<br><br>
 
-* 24h/24 et 7j/7 (sauf maintenance)<br>
-* Sous réserve de disponibilité technique<br><br>
+    * 24h/24 et 7j/7 (sauf maintenance)<br>
+    * Sous réserve de disponibilité technique<br><br>
 
-L’éditeur se réserve le droit de suspendre l’accès temporairement pour maintenance ou mise à jour.<br><br>
+    L’éditeur se réserve le droit de suspendre l’accès temporairement pour maintenance ou mise à jour.</p><br><br>
 
-4. Inscription et compte utilisateur<br><br>
+<h2>4. Inscription et compte utilisateur</h2><br><br>
 
-Certaines fonctionnalités nécessitent la création d’un compte.<br><br>
+<p>Certaines fonctionnalités nécessitent la création d’un compte.<br><br>
 
-L’utilisateur s’engage à :<br><br>
+    L’utilisateur s’engage à :<br><br>
 
-* Fournir des informations exactes<br>
-* Maintenir ses données à jour<br>
-* Conserver la confidentialité de ses identifiants<br>
-* Ne pas partager son compte<br><br>
+    * Fournir des informations exactes<br>
+    * Maintenir ses données à jour<br>
+    * Conserver la confidentialité de ses identifiants<br>
+    * Ne pas partager son compte<br><br>
 
-L’éditeur peut suspendre ou supprimer un compte en cas de non-respect des CGU.<br><br>
+    L’éditeur peut suspendre ou supprimer un compte en cas de non-respect des CGU.</p><br><br>
 
-5. Rôle de la plateforme<br><br>
+<h2>5. Rôle de la plateforme</h2><br><br>
 
-La plateforme agit uniquement comme **intermédiaire technique de mise en relation**.<br><br>
+<p>La plateforme agit uniquement comme **intermédiaire technique de mise en relation**.<br><br>
 
-Elle ne :<br><br>
+    Elle ne :<br><br>
 
-* Ne fournit pas de diagnostic médical<br>
-* Ne remplace pas une consultation<br>
-* N’exerce pas d’activité médicale<br><br>
+    * Ne fournit pas de diagnostic médical<br>
+    * Ne remplace pas une consultation<br>
+    * N’exerce pas d’activité médicale<br><br>
 
-Les consultations sont réalisées sous la seule responsabilité des professionnels de santé.<br><br>
+    Les consultations sont réalisées sous la seule responsabilité des professionnels de santé.</p><br><br>
 
-6. Responsabilité des utilisateurs<br><br>
+<h2>6. Responsabilité des utilisateurs</h2><br><br>
 
-Chaque utilisateur est responsable :<br><br>
+<p>Chaque utilisateur est responsable :<br><br>
 
-* Des informations qu’il publie<br>
-* De son comportement sur la plateforme<br>
-* Du respect des lois en vigueur<br><br>
+    * Des informations qu’il publie<br>
+    * De son comportement sur la plateforme<br>
+    * Du respect des lois en vigueur<br><br>
 
-Tout contenu illégal, diffamatoire ou contraire aux bonnes mœurs pourra être supprimé sans préavis.<br><br>
+    Tout contenu illégal, diffamatoire ou contraire aux bonnes mœurs pourra être supprimé sans préavis.</p><br><br>
 
-7. Données de santé<br><br>
+<h2>7. Données de santé</h2><br><br>
 
-Les données de santé éventuellement transmises :<br><br>
+<p>Les données de santé éventuellement transmises :<br><br>
 
-* Sont traitées conformément au RGPD<br>
-* Nécessitent un **consentement explicite**<br>
-* Sont strictement limitées au nécessaire<br><br>
+    * Sont traitées conformément au RGPD<br>
+    * Nécessitent un **consentement explicite**<br>
+    * Sont strictement limitées au nécessaire<br><br>
 
-L’utilisateur peut retirer son consentement à tout moment.<br><br>
+    L’utilisateur peut retirer son consentement à tout moment.</p><br><br>
 
-8. Comportement interdit<br><br>
+<h2>8. Comportement interdit</h2><br><br>
 
-Il est strictement interdit de :<br><br>
+<p>Il est strictement interdit de :<br><br>
 
-* Usurper l’identité d’un tiers<br>
-* Publier des contenus offensants ou discriminatoires<br>
-* Tenter d’accéder frauduleusement au système<br>
-* Utiliser la plateforme à des fins illégales<br>
-* Extraire massivement des données (scraping)<br><br>
+    * Usurper l’identité d’un tiers<br>
+    * Publier des contenus offensants ou discriminatoires<br>
+    * Tenter d’accéder frauduleusement au système<br>
+    * Utiliser la plateforme à des fins illégales<br>
+    * Extraire massivement des données (scraping)</p><br><br>
 
-9. Disponibilité et sécurité<br><br>
+<h2>9. Disponibilité et sécurité</h2><br><br>
 
-L’éditeur met en œuvre des mesures raisonnables pour assurer :<br><br>
+<p>L’éditeur met en œuvre des mesures raisonnables pour assurer :<br><br>
 
-* La sécurité des données<br><br>
-* La protection contre les accès non autorisés<br><br>
+    * La sécurité des données<br><br>
+    * La protection contre les accès non autorisés<br><br>
 
-Cependant, aucun système informatique ne peut garantir une sécurité absolue.<br><br>
+    Cependant, aucun système informatique ne peut garantir une sécurité absolue.</p><br><br>
 
-10. Propriété intellectuelle<br><br>
+<h2>10. Propriété intellectuelle</h2><br><br>
 
-Tous les éléments du site sont protégés par le droit de la propriété intellectuelle.<br><br>
+<p>Tous les éléments du site sont protégés par le droit de la propriété intellectuelle.<br><br>
 
-Toute reproduction sans autorisation est interdite.<br><br>
+    Toute reproduction sans autorisation est interdite.</p><br><br>
 
-11. Modification des CGU<br><br>
+<h2>11. Modification des CGU</h2><br><br>
 
-Les CGU peuvent être modifiées à tout moment.<br>
-La version applicable est celle publiée sur le site à la date d’utilisation.<br><br>
+<p>Les CGU peuvent être modifiées à tout moment.<br>
+    La version applicable est celle publiée sur le site à la date d’utilisation.</p><br><br>
 
-12. Suspension / Résiliation<br><br>
+<h2>12. Suspension / Résiliation</h2><br><br>
 
-L’éditeur peut suspendre ou supprimer un compte en cas :<br><br>
+<p>L’éditeur peut suspendre ou supprimer un compte en cas :<br><br>
 
-* De non-respect des CGU<br>
-* De comportement frauduleux<br>
-* De risque pour la sécurité du service<br><br>
+    * De non-respect des CGU<br>
+    * De comportement frauduleux<br>
+    * De risque pour la sécurité du service<br><br>
 
-L’utilisateur peut supprimer son compte à tout moment.<br><br>
+    L’utilisateur peut supprimer son compte à tout moment.</p><br><br>
 
-13. Limitation de responsabilité<br><br>
+<h2>13. Limitation de responsabilité</h2><br><br>
 
-Dans la limite autorisée par la loi :<br><br>
+<p>Dans la limite autorisée par la loi :<br><br>
 
-* L’éditeur ne saurait être responsable des décisions médicales prises<br>
-* La responsabilité médicale incombe aux professionnels<br>
-* L’éditeur ne garantit pas l’obtention d’un rendez-vous<br><br>
+    * L’éditeur ne saurait être responsable des décisions médicales prises<br>
+    * La responsabilité médicale incombe aux professionnels<br>
+    * L’éditeur ne garantit pas l’obtention d’un rendez-vous</p><br><br>
 
-14. Droit applicable et litiges<br><br>
+<h2>14. Droit applicable et litiges</h2><br><br>
 
-Les présentes CGU sont régies par le droit français.<br><br>
+<p>Les présentes CGU sont régies par le droit français.<br><br>
 
-En cas de litige :<br><br>
+    En cas de litige :<br><br>
 
-* Recherche d’une solution amiable prioritaire<br>
-* À défaut, compétence des tribunaux du siège social de l’éditeur
+    * Recherche d’une solution amiable prioritaire<br>
+    * À défaut, compétence des tribunaux du siège social de l’éditeur
 </p>
 <footer class="footer">
     <div class="container">

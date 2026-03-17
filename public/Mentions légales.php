@@ -16,6 +16,23 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Politique de confidentialité</title>
     <link rel="stylesheet" href="../css/Page_Accueil.css">
+    <style>
+        h1{
+            text-align: center;
+            font-size: 25px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+        h2{
+            text-align: left;
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+        }
+        p{
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar">
@@ -48,72 +65,70 @@ try {
         <button class="btn-login">LOGIN</button>
     </div>
 </nav>
-<p> MENTIONS LÉGALES<br><br>
+<h1>MENTIONS LÉGALES</h1> <br><br>
 
 **Dernière mise à jour : [date]**<br><br>
 
-1. Éditeur du site<br><br>
+<h2>1. Éditeur du site</h2><br><br>
 
-Le présent site **[Nom du site]** est édité par :<br><br>
+<p>Le présent site **[Nom du site]** est édité par :<br><br>
+    **[Nom de la société / association]**<br>
+    Forme juridique : [SAS, SARL, Association, etc.]<br>
+    Capital social : [si applicable]<br>
+    Adresse du siège social : [adresse complète]<br>
+    Numéro SIREN / SIRET : [numéro]<br>
+    RCS : [ville d’immatriculation, si société commerciale]<br>
+    Email : [email de contact]<br>
+    Téléphone : [si applicable]<br>
 
-**[Nom de la société / association]**<br>
-Forme juridique : [SAS, SARL, Association, etc.]<br>
-Capital social : [si applicable]<br>
-Adresse du siège social : [adresse complète]<br>
-Numéro SIREN / SIRET : [numéro]<br>
-RCS : [ville d’immatriculation, si société commerciale]<br>
-Email : [email de contact]<br>
-Téléphone : [si applicable]<br>
+    Directeur de la publication : **[Nom et prénom]**</p><br><br>
 
-Directeur de la publication : **[Nom et prénom]**<br><br>
+<h2>2. Hébergeur</h2><br><br>
 
-2. Hébergeur<br><br>
+<p>Le site est hébergé par :<br><br>
 
-Le site est hébergé par :<br><br>
+    **[Nom de l’hébergeur]**<br>
+    Adresse : [adresse complète]<br>
+    Téléphone : [numéro]<br>
+    Site web : [URL]</p><br><br>
 
-**[Nom de l’hébergeur]**<br>
-Adresse : [adresse complète]<br>
-Téléphone : [numéro]<br>
-Site web : [URL]<br><br>
+<h2>3. Objet du site</h2><br><br>
 
-3. Objet du site<br><br>
+<p>Le site a pour objet de **mettre en relation des étudiants et des professionnels de santé mentale**, et de faciliter la prise de rendez-vous et l’accès à l’information.<br><br>
 
-Le site a pour objet de **mettre en relation des étudiants et des professionnels de santé mentale**, et de faciliter la prise de rendez-vous et l’accès à l’information.<br><br>
+    Les informations disponibles sur le site ne remplacent pas une consultation médicale.</p><br><br>
 
-Les informations disponibles sur le site ne remplacent pas une consultation médicale.<br><br>
+<h2>4. Propriété intellectuelle</h2><br><br>
 
-4. Propriété intellectuelle<br><br>
+<p>L’ensemble des éléments présents sur le site (textes, images, logos, graphismes, structure, base de données, etc.) sont protégés par le droit de la propriété intellectuelle.<br><br>
 
-L’ensemble des éléments présents sur le site (textes, images, logos, graphismes, structure, base de données, etc.) sont protégés par le droit de la propriété intellectuelle.<br><br>
+    Toute reproduction, représentation, modification ou exploitation, totale ou partielle, sans autorisation préalable écrite, est interdite.</p><br><br>
 
-Toute reproduction, représentation, modification ou exploitation, totale ou partielle, sans autorisation préalable écrite, est interdite.<br><br>
+<h2>5. Responsabilité</h2><br><br>
 
-5. Responsabilité<br><br>
+<p>L’éditeur s’efforce d’assurer l’exactitude des informations diffusées.<br>
+    Cependant, il ne peut garantir l’absence d’erreurs ou d’omissions.<br><br>
 
-L’éditeur s’efforce d’assurer l’exactitude des informations diffusées.<br>
-Cependant, il ne peut garantir l’absence d’erreurs ou d’omissions.<br><br>
+    Le site ne peut être tenu responsable :<br><br>
 
-Le site ne peut être tenu responsable :<br><br>
+    * Des dommages directs ou indirects liés à l’utilisation du service<br>
+    * Des contenus publiés par les utilisateurs<br>
+    * Des décisions prises par les utilisateurs suite aux informations disponibles<br><br>
 
-* Des dommages directs ou indirects liés à l’utilisation du service<br>
-* Des contenus publiés par les utilisateurs<br>
-* Des décisions prises par les utilisateurs suite aux informations disponibles<br><br>
+    Les professionnels de santé sont seuls responsables de leurs actes dans le cadre de leur pratique.</p><br><br>
 
-Les professionnels de santé sont seuls responsables de leurs actes dans le cadre de leur pratique.<br><br>
+<h2>6. Données personnelles</h2><br><br>
 
-6. Données personnelles<br><br>
+<p>Le traitement des données personnelles est détaillé dans la **Politique de Confidentialité**, accessible à l’adresse :[URL de la politique].<br><br>
 
-Le traitement des données personnelles est détaillé dans la **Politique de Confidentialité**, accessible à l’adresse :<br>
-[URL de la politique].<br><br>
+    Conformément au RGPD et à la loi Informatique et Libertés, les utilisateurs disposent de droits d’accès, de rectification et de suppression de leurs données.<br><br>
 
-Conformément au RGPD et à la loi Informatique et Libertés, les utilisateurs disposent de droits d’accès, de rectification et de suppression de leurs données.<br><br>
+    Contact : [email RGPD]</p><br><br>
 
-Contact : [email RGPD]<br><br>
+<h2>7. Droit applicable</h2><br><br>
 
-7. Droit applicable<br><br>
-
-Les présentes mentions légales sont régies par le droit français.<br>
-En cas de litige, et à défaut de résolution amiable, les tribunaux compétents seront ceux du ressort du siège social de l’éditeur.</p>
+<p>Les présentes mentions légales sont régies par le droit français.<br>
+    En cas de litige, et à défaut de résolution amiable, les tribunaux compétents seront ceux du ressort du siège social de l’éditeur.</p>
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">

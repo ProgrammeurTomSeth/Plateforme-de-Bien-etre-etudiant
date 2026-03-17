@@ -15,6 +15,23 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Politique de confidentialité</title>
     <link rel="stylesheet" href="../css/Page_Accueil.css">
+    <style>
+        h1{
+            text-align: center;
+            font-size: 25px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+        h2{
+            text-align: left;
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+        }
+        p{
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar">
@@ -47,16 +64,15 @@ try {
         <button class="btn-login">LOGIN</button>
     </div>
 </nav>
-<p>À propos: <br><br>
+<h1>À propos:</h1> <br><br>
 
-De nous: <br>
+<h2>De nous:</h2> <br>
 
-    Nous sommes des programmeurs juniors qui ont décidé de créer ce site pour mettre en relation des étudiants avec des professionnels de santé mentale.<br><br>
+<p>Nous sommes des programmeurs juniors qui ont décidé de créer ce site pour mettre en relation des étudiants avec des professionnels de santé mentale.</p><br><br>
 
-Du site : <br>
+<h2>Du site :</h2> <br>
 
-    Ce site a été créé pour mettre en relation des étudiants avec des professionnels de santé mentale avec lesquels ils pourront prendre rendez-vous les jours et heures fournis par les professionnels qui mettent leurs horaires à jours d'eux-mêmes.
-</p>
+<p>Ce site a été créé pour mettre en relation des étudiants avec des professionnels de santé mentale avec lesquels ils pourront prendre rendez-vous les jours et heures fournis par les professionnels qui mettent leurs horaires à jours d'eux-mêmes.</p>
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">

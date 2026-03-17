@@ -97,12 +97,6 @@ try {
                 </a>
             </li>
 
-            <li class="nav-item active">
-                <a href="contact.php" class="nav-link">
-                    <span class="icon">Contact</span>
-                </a>
-            </li>
-
         </ul>
 
         <button class="btn-login">LOGIN</button>
@@ -166,10 +160,10 @@ try {
             <div class="footer-col">
                 <h4>Navigation</h4>
                 <ul>
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#professionnels">Professionnels</a></li>
-                    <li><a href="#rdv">Prendre RDV</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="Page_Accueil.php">Accueil</a></li>
+                    <li><a href="Professionnel.php">Professionnels</a></li>
+                    <li><a href="../calendrier/index.php">Prendre RDV</a></li>
+                    <li><a href="FAQ.php">FAQ</a></li>
                 </ul>
             </div>
 
@@ -177,9 +171,9 @@ try {
                 <h4>Informations</h4>
                 <ul>
                     <li><a href="#apropos">À propos</a></li>
-                    <li><a href="#confidentialite">Confidentialité</a></li>
-                    <li><a href="#mentions">Mentions légales</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="Politique de confidentialité.php">Confidentialité</a></li>
+                    <li><a href="Mentions légales.php">Mentions légales</a></li>
+                    <li><a href="contact.php">Contact</a></li>
                 </ul>
             </div>
 

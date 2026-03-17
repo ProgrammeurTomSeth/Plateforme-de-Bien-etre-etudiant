@@ -136,7 +136,7 @@ En cas de litige, et à défaut de résolution amiable, les tribunaux compétent
                     <li><a href="#apropos">À propos</a></li>
                     <li><a href="Politique de confidentialité.php">Confidentialité</a></li>
                     <li><a href="Mentions légales.php">Mentions légales</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="contact.php">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-col">
